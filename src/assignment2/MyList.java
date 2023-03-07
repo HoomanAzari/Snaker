@@ -3,10 +3,10 @@ package assignment2;
 public interface MyList<E> extends Iterable<E> {            //E stands for element
     public int getSize();
     public boolean isEmpty();
-    public boolean add();
+    public boolean add(E elmnt);                // adds element e
     public void clear();
-    public E remove();                      // returns an element of type E
+    public E remove(int i);                      // removes the last elmnt and returns it
 
-    }
+
 
 
