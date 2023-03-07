@@ -1,12 +1,10 @@
 package assignment2;
 
-import java.util.Iterator;
-
 public abstract class MyLinkedList<E> implements MyList<E> {                //Why abstract?
 
     protected int size;
 
-    public abstract MyLinkedList<E>(){
+    public MyLinkedList(){                          //Constructor doesn't need the <E>
         this.size = 0;
     }
     public boolean isEmpty() {
@@ -48,4 +46,4 @@ public abstract class MyLinkedList<E> implements MyList<E> {                //Wh
 //        E next();
 //
 //    }
-}
+
