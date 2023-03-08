@@ -6,8 +6,8 @@ public class MyStack<E> {
     private MyDoublyLinkedList DLinkedList;
 
     public MyStack () {
-        MyStack myStack = new MyStack();                //unsure about this
-        myStack.DLinkedList.size = 0;                   //creates a stack of size 0
+        this.DLinkedList = new MyDoublyLinkedList<E>();          //unsure about this
+        this.DLinkedList.size = 0;                               //creates a stack of size 0
     }
 
     public boolean push (E elmnt) {
