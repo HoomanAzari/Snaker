@@ -12,7 +12,7 @@ public class MyQueue<E> {
         return DList.addLast(elmnt);
     }
 
-    public E deqeueu() {
+    public E dequeue() {
         return (E)DList.removeFirst();
     }
 
