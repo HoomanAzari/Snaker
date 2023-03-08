@@ -124,11 +124,19 @@ public class MyDoublyLinkedList<E> extends MyLinkedList<E> {
         }
     }
     public boolean equals(Object obj) {
-        if (!(obj instanceof MyDoublyLinkedList)) {
+        if ((!(obj instanceof MyDoublyLinkedList)) || obj == null) {
             return false;
         }
-
-
+        MyDoublyLinkedList<E> other = (MyDoublyLinkedList<E>) obj;        //type casting
+        Iterator<E> mainIterator = this.iterator();
+        Iterator<E> otherIterator = other.iterator();
+        while(mainIterator.hasNext() && otherIterator.hasNext()) {
+            E mainElement = mainIterator.next();                           //The next method returns an E element
+            E otherElement = otherIterator.next();
+            if (mainElement != otherElement) {                      //Check whether the two elements are the same
+                return false;
+            }
+        } return true;
     }
     /*
      * ADD YOUR CODE HERE
