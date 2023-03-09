@@ -3,7 +3,7 @@ package assignment2;
 import java.util.NoSuchElementException;
 
 public class MyStack<E> {
-    private MyDoublyLinkedList DLinkedList;
+    private MyDoublyLinkedList<E> DLinkedList;
 
     public MyStack () {
         this.DLinkedList = new MyDoublyLinkedList<E>();          //unsure about this
@@ -19,7 +19,7 @@ public class MyStack<E> {
             throw new NoSuchElementException("The stack is empty.");
         }
         else {
-            return (E)this.DLinkedList.removeFirst();    //TODO Ask why I have to typecast to E, when removeFirst already returns E
+            return this.DLinkedList.removeFirst();    //TODO Ask why I have to typecast to E, when removeFirst already returns E
         }
     }
 
@@ -28,7 +28,7 @@ public class MyStack<E> {
             throw new NoSuchElementException("The stack is empty");
         }
         else {
-            return (E)this.DLinkedList.peekFirst();
+            return this.DLinkedList.peekFirst();
         }
     }
 

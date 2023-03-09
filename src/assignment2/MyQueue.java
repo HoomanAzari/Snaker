@@ -1,7 +1,7 @@
 package assignment2;
 
 public class MyQueue<E> {
-    private MyDoublyLinkedList DList;
+    private MyDoublyLinkedList<E> DList;
 
     public MyQueue() {
         DList = new MyDoublyLinkedList<E>();
@@ -13,7 +13,7 @@ public class MyQueue<E> {
     }
 
     public E dequeue() {
-        return (E)DList.removeFirst();
+        return DList.removeFirst();
     }
 
     public boolean isEmpty() {
