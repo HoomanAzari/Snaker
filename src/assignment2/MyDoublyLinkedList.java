@@ -14,7 +14,7 @@ public class MyDoublyLinkedList<E> extends MyLinkedList<E> {
 
         if (this.size == 0) {
             this.head = newNode;
-            this.tail = newNode;       //both head and tail point at the new node
+            this.tail = newNode;                       //both head and tail point at the new node
             this.size += 1;
             return true;
         }
@@ -50,6 +50,9 @@ public class MyDoublyLinkedList<E> extends MyLinkedList<E> {
     }
 
     public boolean addFirst(E elmnt) {
+        if (elmnt.equals(null)) {
+            return false;
+        }
         DNode newNode = new DNode();
         newNode.element = elmnt;
         newNode.next = this.head;
@@ -58,10 +61,13 @@ public class MyDoublyLinkedList<E> extends MyLinkedList<E> {
         }
         this.head = newNode;
         this.size += 1;
-        return true;                            //TODO how to return false?
+        return true;
     }
 
     public boolean addLast(E elmnt) {
+        if (elmnt.equals(null)) {
+            return false;
+        }
         DNode newNode = new DNode();
         newNode.element = elmnt;
         if (this.head == null) {                //Edge case if list is empty;
@@ -70,7 +76,7 @@ public class MyDoublyLinkedList<E> extends MyLinkedList<E> {
         this.tail.next = newNode;
         this.tail = newNode;
         this.size += 1;
-        return true;                        //TODO how to return false?
+        return true;
     }
 
     public E removeFirst() {
@@ -124,7 +130,7 @@ public class MyDoublyLinkedList<E> extends MyLinkedList<E> {
         }
     }
     public boolean equals(Object obj) {
-        if ((!(obj instanceof MyDoublyLinkedList)) || obj == null) {
+        if ((!(obj instanceof MyDoublyLinkedList)) || obj.equals(null)) {
             return false;
         }
         MyDoublyLinkedList<E> other = (MyDoublyLinkedList<E>) obj;        //type casting

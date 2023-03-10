@@ -15,16 +15,16 @@ public class MyStack<E> {
     }
 
     public E pop() {
-        if (this.DLinkedList.size == 0) {                                   //TODO ask if i can get rid of this since I call it already in DLinked
+        if (this.DLinkedList.size == 0) {
             throw new NoSuchElementException("The stack is empty.");
         }
         else {
-            return this.DLinkedList.removeFirst();    //TODO Ask why I have to typecast to E, when removeFirst already returns E
+            return this.DLinkedList.removeFirst();
         }
     }
 
     public E peek() {
-        if (this.DLinkedList.size == 0) {               //TODO can i get rid of this
+        if (this.DLinkedList.size == 0) {
             throw new NoSuchElementException("The stack is empty");
         }
         else {
