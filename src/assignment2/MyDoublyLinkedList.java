@@ -115,6 +115,16 @@ public class MyDoublyLinkedList<E> extends MyLinkedList<E> {
         }
     }
 
+    /*public E peekSecond(){          //TODO might have to remove this
+        if ((this.size == 0) || (this.size == 1)) {
+            throw new NoSuchElementException("The list is not big enough.");
+        }
+        else {
+            return this.head.next.element;
+        }
+    }
+     */
+
     public E peekLast() {
         if (this.size == 0) {
             throw new NoSuchElementException("The list is empty.");

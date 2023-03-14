@@ -32,6 +32,24 @@ public class MyStack<E> {
         }
     }
 
+    /*public E peekTwo() {
+        if ((this.DLinkedList.size == 0) || (this.DLinkedList.size == 1)) {
+            throw new NoSuchElementException("The stack is not big enough.");
+        } else {
+            return this.DLinkedList.peekSecond();
+        }
+    }
+     */
+
+    public E peekEnd() {
+        if (this.DLinkedList.size == 0) {
+            throw new NoSuchElementException("The stack is empty");
+        }
+        else {
+            return this.DLinkedList.peekLast();
+        }
+    }
+
     public boolean isEmpty() {
         return this.DLinkedList.isEmpty();
     }
