@@ -8,43 +8,78 @@ public class TargetQueue extends MyQueue<Position> {
 
     public TargetQueue() {
         super();                //TODO calls superclass constructor and initializes its fields.
-        this.string_Stack = new MyStack<>();
+        this.string_Stack = new MyStack<String>();
     }
 
     public void clear() {
         super.clear();
-        string_Stack.clear();
+        if (!(this.string_Stack.isEmpty())) {
+            string_Stack.clear();
+        }
     }
 
     public void addTarget(String input) {
-        for (int i = 0; i < input.length() - 1; i++) {
+        boolean end = false;
+        for (int i = 0; i < input.length() - 1; i++) {                  //TODO length-1 or length
             char c = input.charAt(i);
-            if ((c == '(') && (super.isEmpty()) & string_Stack.isEmpty()) {                 //have to you use '' not "" when referring to characters
-                string_Stack.push(Character.toString(c));
+            if (c == '(') {
+                if (!(this.string_Stack.isEmpty()) || (!(this.num.isEmpty())) || end) {
+                    throw new IllegalArgumentException();
+                } else {
+                    this.string_Stack.push("(");
+                }
+
             } else if (Character.isDigit(c)) {                             //not sure why I'm using Character
+                if (this.num.isEmpty()) {
+                    this.num = "";
+                }
                 this.num += c;
 
             } else if (c == ',') {                             //not directly checking for validity of integer
                 if (this.num.isEmpty()) {
                     throw new IllegalArgumentException("Invalid input.");           //not sure about this part //Todo illegal argument or no such element
+                } else {
+                    string_Stack.push(num);
+                    string_Stack.push(",");
+                    this.num = "";
                 }
-                string_Stack.push(num);
-                string_Stack.push(Character.toString(c));
-                this.num = "";
 
             } else if (c == ')') {
-                if ((string_Stack.getSize() == 3) && ((string_Stack.peek().equals(","))) && (!(this.num.isEmpty())) && ((string_Stack.peekEnd().equals("(")))) {
-                    Position()                  //TODO where do i get y?
-            } else if (this.num.isEmpty()) {
-                throw new IllegalArgumentException("Invalid input.");               //TODO illegal argument or no such element
+                if (this.string_Stack.getSize() != 3) {
+                    throw new IllegalArgumentException("Invalid input.");
+                } else {
+                    int number;
+                    if (this.string_Stack.pop().equals(",")) {
+                        try {
+                            number = Integer.parseInt(this.string_Stack.pop());
+                        } catch (Exception e) {
+                            throw new IllegalArgumentException("Invalid input.");
+                        }
+                        if (!(this.string_Stack.pop().equals("("))) {
+                            throw new IllegalArgumentException("Invalid input.");
+                        }
+                    } else {
+                        throw new IllegalArgumentException("Invalid input.");
+                    }
+                    if (this.num.isEmpty()) {
+                        throw new IllegalArgumentException("Invalid input.");
+                    }
+                    Position position = new Position(number, Integer.parseInt(this.num));
+                    this.enqueue(position);
+                    end = true;
+                    this.num = "";
+                }
+            } else if (c == '.') {
+                if (num != null || !(string_Stack.isEmpty())) {
+                    throw new IllegalArgumentException("Invalid input.");
+                }
+                end = false;
             } else {
-                throw new NoSuchElementException("Invalid input.");
+                throw new IllegalArgumentException("Invalid input.");
             }
-            }
-           else if (c == '.') {
-
-            }
+        }
+        if (!(this.string_Stack.isEmpty()) || !(this.num.isEmpty())) {
+            throw new IllegalArgumentException("Invalid input.");
         }
     }
 }
-
