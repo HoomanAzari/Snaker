@@ -7,7 +7,7 @@ public class TargetQueue extends MyQueue<Position> {
     private String num;             //used to save numbers for iterations
 
     public TargetQueue() {
-        super();                //TODO calls superclass constructor and initializes its fields.
+        super();
         this.string_Stack = new MyStack<String>();
     }
 
@@ -23,7 +23,7 @@ public class TargetQueue extends MyQueue<Position> {
         for (int i = 0; i < input.length() - 1; i++) {                  //TODO length-1 or length
             char c = input.charAt(i);
             if (c == '(') {
-                if (!(this.string_Stack.isEmpty()) || (!(this.num.isEmpty())) || end) {
+                if (!(this.string_Stack.isEmpty()) || !(this.num.isEmpty()) || end) {
                     throw new IllegalArgumentException();
                 } else {
                     this.string_Stack.push("(");
@@ -35,9 +35,9 @@ public class TargetQueue extends MyQueue<Position> {
                 }
                 this.num += c;
 
-            } else if (c == ',') {                             //not directly checking for validity of integer
+            } else if (c == ',') {
                 if (this.num.isEmpty()) {
-                    throw new IllegalArgumentException("Invalid input.");           //not sure about this part //Todo illegal argument or no such element
+                    throw new IllegalArgumentException("Invalid input.");
                 } else {
                     string_Stack.push(num);
                     string_Stack.push(",");
@@ -70,7 +70,7 @@ public class TargetQueue extends MyQueue<Position> {
                     this.num = "";
                 }
             } else if (c == '.') {
-                if (num != null || !(string_Stack.isEmpty())) {
+                if (!(this.num.isEmpty()) || !(this.string_Stack.isEmpty())) {
                     throw new IllegalArgumentException("Invalid input.");
                 }
                 end = false;
