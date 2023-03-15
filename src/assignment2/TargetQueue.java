@@ -51,7 +51,7 @@ public class TargetQueue extends MyQueue<Position> {
                     int number;
                     if (this.string_Stack.pop().equals(",")) {
                         try {
-                            number = Integer.parseInt(this.string_Stack.pop());
+                            number = Integer.parseInt(this.string_Stack.pop());                         //checking if this is x-cord
                         } catch (Exception e) {
                             throw new IllegalArgumentException("Invalid input.");
                         }

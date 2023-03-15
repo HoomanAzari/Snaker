@@ -1,8 +1,13 @@
 package assignment2;
 
 public enum Direction {
-    NORTH,
-    SOUTH,
-    WEST,
-    EAST
+    NORTH('N'),
+    SOUTH('S'),
+    WEST('W'),
+    EAST('E');
+    final char letter;
+    Direction(char letter) {
+        this.letter = letter;
+    }
+
 }
