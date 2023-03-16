@@ -18,9 +18,9 @@ public class TargetQueue extends MyQueue<Position> {
         }
     }
 
-    public void addTarget(String input) {
+    public void addTargets(String input) {
         boolean end = false;
-        for (int i = 0; i < input.length() - 1; i++) {                  //TODO length-1 or length
+        for (int i = 0; i < input.length(); i++) {
             char c = input.charAt(i);
             if (c == '(') {
                 if (!(this.string_Stack.isEmpty()) || !(this.num.isEmpty()) || end) {

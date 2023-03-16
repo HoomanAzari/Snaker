@@ -31,7 +31,7 @@ public class Position {
         this.y_Coord = pos_obj.y_Coord;
     }
 
-    public int getDistance(Position pos) {                //TODO Ask only between two position objects?
+    public int getDistance(Position pos) {
         int x_dist = Math.abs(this.x_Coord - pos.x_Coord);
         int y_dist = Math.abs(this.y_Coord - pos.y_Coord);
         return x_dist + y_dist;
