@@ -12,7 +12,7 @@ public class MyDoublyLinkedList<E> extends MyLinkedList<E> {
         this.tail = new DNode();
     }
 
-    public boolean add(E elmnt) {                      //adds to the end of the list
+    public void add(E elmnt) {                      //adds to the end of the list
         DNode newNode = new DNode();
         newNode.element = elmnt;
 
@@ -22,7 +22,6 @@ public class MyDoublyLinkedList<E> extends MyLinkedList<E> {
             this.head.next = this.tail;
             this.tail.prev = this.head;
             this.size += 1;
-            return true;
         }
         else if(this.size > 0) {
             DNode temp = this.tail;
@@ -30,9 +29,7 @@ public class MyDoublyLinkedList<E> extends MyLinkedList<E> {
             this.tail = newNode;
             this.tail.prev = temp;
             this.size += 1;
-            return true;
         }
-        return false;
     }
     public E remove() {
         if (isEmpty()) {                                   //Edge case if list is empty
@@ -65,9 +62,16 @@ public class MyDoublyLinkedList<E> extends MyLinkedList<E> {
         newNode.element = elmnt;
         if (isEmpty()) {                //Edge case if list is empty
             this.tail = newNode;
+            this.head = newNode;
+            this.head.next = this.tail;
+            this.tail.prev = this.head;
+            this.size += 1;
+            return true;
         }
-        newNode.next = this.head;
+        DNode temp = this.head;
+        this.head.prev = newNode;
         this.head = newNode;
+        this.head.next = temp;
         this.size += 1;
         return true;
     }
@@ -75,16 +79,28 @@ public class MyDoublyLinkedList<E> extends MyLinkedList<E> {
     public boolean addLast(E elmnt) {
         if (elmnt.equals(null)) {
             return false;
+        } else {
+            DNode newNode = new DNode();
+            newNode.element = elmnt;
+
+            if (isEmpty()) {
+                this.head = newNode;
+                this.tail = newNode;                       //both head and tail point at the new node
+                this.head.next = this.tail;
+                this.tail.prev = this.head;
+                this.size += 1;
+                return true;
+            }
+            else if(this.size > 0) {
+                DNode temp = this.tail;
+                this.tail.next = newNode;
+                this.tail = newNode;
+                this.tail.prev = temp;
+                this.size += 1;
+                return true;
+            }
+            return false;
         }
-        DNode newNode = new DNode();
-        newNode.element = elmnt;
-        if (this.head == null) {                //Edge case if list is empty;
-            this.head = newNode;
-        }
-        this.tail.next = newNode;
-        this.tail = newNode;
-        this.size += 1;
-        return true;
     }
 
     public E removeFirst() {
@@ -93,8 +109,9 @@ public class MyDoublyLinkedList<E> extends MyLinkedList<E> {
         }
         else if (this.size == 1) {
             E elmnt = this.tail.element;
-            this.head = null;               //dont say this.head.element = null cause it's also the tail
             this.tail.element = null;
+            this.tail.prev = null;          //TODO is this needed
+            this.head.next = null;          //TODO is this needed
             this.tail = null;
             this.size -= 1;
             return elmnt;
@@ -110,7 +127,7 @@ public class MyDoublyLinkedList<E> extends MyLinkedList<E> {
         }
     }
 
-    public E removeLast() {         //TODO ask if removelast is the same as just remove
+    public E removeLast() {
         return remove();
     }
 
@@ -137,8 +154,9 @@ public class MyDoublyLinkedList<E> extends MyLinkedList<E> {
         this.tail = null;
         this.size = 0;
         }
+
     public boolean equals(Object obj) {
-        if ((!(obj instanceof MyDoublyLinkedList)) || obj.equals(null)) {
+        if ((obj == null) || !(obj instanceof MyDoublyLinkedList)) {
             return false;
         }
         MyDoublyLinkedList<E> other = (MyDoublyLinkedList<E>) obj;        //type casting

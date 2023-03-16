@@ -25,7 +25,11 @@ public class MyQueue<E> {
     }
 
     public boolean equals(Object obj) {
-        return ((obj instanceof MyQueue) && (DList.equals(obj)));
+        if (!(obj instanceof MyQueue)) {
+            return false;
+        }
+        MyQueue<E> newQueue = (MyQueue) obj;
+        return this.DList.equals(newQueue.DList);
     }
 
 }

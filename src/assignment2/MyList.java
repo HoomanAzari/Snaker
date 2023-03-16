@@ -5,7 +5,7 @@ public interface MyList<E> extends Iterable<E> {            //E stands for eleme
 
     public boolean isEmpty();
 
-    public boolean add(E elmnt);                // adds element e
+    public void add(E elmnt);                // adds element e
 
     public void clear();
 
