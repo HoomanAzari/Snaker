@@ -7,27 +7,35 @@ public class MyDoublyLinkedList<E> extends MyLinkedList<E> {
 
     private DNode head;
     private DNode tail;
+    public MyDoublyLinkedList() {
+        this.head = new DNode();
+        this.tail = new DNode();
+    }
 
-    public boolean add(E elmnt) {                      //same add method from MyList?
+    public boolean add(E elmnt) {                      //adds to the end of the list
         DNode newNode = new DNode();
         newNode.element = elmnt;
 
-        if (this.size == 0) {
+        if (isEmpty()) {
             this.head = newNode;
             this.tail = newNode;                       //both head and tail point at the new node
+            this.head.next = this.tail;
+            this.tail.prev = this.head;
             this.size += 1;
             return true;
         }
-        else if(this.size > 1) {
+        else if(this.size > 0) {
+            DNode temp = this.tail;
             this.tail.next = newNode;
-            this.tail = this.tail.next;
+            this.tail = newNode;
+            this.tail.prev = temp;
             this.size += 1;
             return true;
         }
         return false;
     }
     public E remove() {
-        if (this.size == 0) {                                   //Edge case if list is empty
+        if (isEmpty()) {                                   //Edge case if list is empty
             throw new NoSuchElementException("The list is empty.");
         }
         else if (this.size == 1) {                              //Edge case if list has one element
@@ -39,7 +47,7 @@ public class MyDoublyLinkedList<E> extends MyLinkedList<E> {
             return elmnt;
         }
         else {
-            E elmnt = tail.element;
+            E elmnt = this.tail.element;
             this.tail = this.tail.prev;
             this.tail.next.element = null;
             this.tail.next.prev = null;
@@ -55,10 +63,10 @@ public class MyDoublyLinkedList<E> extends MyLinkedList<E> {
         }
         DNode newNode = new DNode();
         newNode.element = elmnt;
-        newNode.next = this.head;
-        if (this.head == null) {                //Edge case if list is empty
+        if (isEmpty()) {                //Edge case if list is empty
             this.tail = newNode;
         }
+        newNode.next = this.head;
         this.head = newNode;
         this.size += 1;
         return true;
@@ -80,12 +88,12 @@ public class MyDoublyLinkedList<E> extends MyLinkedList<E> {
     }
 
     public E removeFirst() {
-        if (this.size == 0) {
+        if (isEmpty()) {
             throw new NoSuchElementException("The list is empty.");
         }
         else if (this.size == 1) {
             E elmnt = this.tail.element;
-            this.head = null;
+            this.head = null;               //dont say this.head.element = null cause it's also the tail
             this.tail.element = null;
             this.tail = null;
             this.size -= 1;
@@ -107,7 +115,7 @@ public class MyDoublyLinkedList<E> extends MyLinkedList<E> {
     }
 
     public E peekFirst() {
-        if (this.size == 0) {
+        if (isEmpty()) {
             throw new NoSuchElementException("The list is empty.");
         }
         else {
@@ -115,18 +123,8 @@ public class MyDoublyLinkedList<E> extends MyLinkedList<E> {
         }
     }
 
-    /*public E peekSecond(){          //TODO might have to remove this
-        if ((this.size == 0) || (this.size == 1)) {
-            throw new NoSuchElementException("The list is not big enough.");
-        }
-        else {
-            return this.head.next.element;
-        }
-    }
-     */
-
     public E peekLast() {
-        if (this.size == 0) {
+        if (isEmpty()) {
             throw new NoSuchElementException("The list is empty.");
         }
         else {
@@ -135,10 +133,10 @@ public class MyDoublyLinkedList<E> extends MyLinkedList<E> {
     }
 
     public void clear() {
-        while (this.head != null) {
-            removeFirst();
+        this.head = null;
+        this.tail = null;
+        this.size = 0;
         }
-    }
     public boolean equals(Object obj) {
         if ((!(obj instanceof MyDoublyLinkedList)) || obj.equals(null)) {
             return false;
@@ -154,9 +152,6 @@ public class MyDoublyLinkedList<E> extends MyLinkedList<E> {
             }
         } return true;
     }
-    /*
-     * ADD YOUR CODE HERE
-     */
 
     private class DNode {
         private E element;
