@@ -7,12 +7,9 @@ public class MyDoublyLinkedList<E> extends MyLinkedList<E> {
 
     private DNode head;
     private DNode tail;
-    public MyDoublyLinkedList() {
-        this.head = new DNode();
-        this.tail = new DNode();
-    }
 
-    public void add(E elmnt) {                      //adds to the end of the list
+
+    public boolean add(E elmnt) {                      //adds to the end of the list //TODO Add null edge case?
         DNode newNode = new DNode();
         newNode.element = elmnt;
 
@@ -22,6 +19,7 @@ public class MyDoublyLinkedList<E> extends MyLinkedList<E> {
             this.head.next = this.tail;
             this.tail.prev = this.head;
             this.size += 1;
+            return true;
         }
         else if(this.size > 0) {
             DNode temp = this.tail;
@@ -29,7 +27,8 @@ public class MyDoublyLinkedList<E> extends MyLinkedList<E> {
             this.tail = newNode;
             this.tail.prev = temp;
             this.size += 1;
-        }
+            return true;
+        }return false;
     }
     public E remove() {
         if (isEmpty()) {                                   //Edge case if list is empty

@@ -28,7 +28,7 @@ public class MyQueue<E> {
         if (!(obj instanceof MyQueue)) {
             return false;
         }
-        MyQueue<E> newQueue = (MyQueue) obj;
+        MyQueue<E> newQueue = (MyQueue<E>) obj;
         return this.DList.equals(newQueue.DList);
     }
 
