@@ -9,15 +9,16 @@ public class MyDoublyLinkedList<E> extends MyLinkedList<E> {
     private DNode tail;
 
 
-    public boolean add(E elmnt) {                      //adds to the end of the list //TODO Add null edge case?
+    public boolean add(E elmnt) {
+        if (elmnt == null) {
+            return false;
+        }
         DNode newNode = new DNode();
         newNode.element = elmnt;
 
         if (isEmpty()) {
             this.head = newNode;
             this.tail = newNode;                       //both head and tail point at the new node
-            this.head.next = this.tail;
-            this.tail.prev = this.head;
             this.size += 1;
             return true;
         }

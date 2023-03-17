@@ -27,7 +27,7 @@ public class ActionQueue extends MyQueue<Direction> {
             } else if ((c == 'E') || (c == 'W') || (c == 'S') || (c == 'N')) {
                 direction += c;
             } else if ((c == '[')) {
-                if (i == 0 || !(direction.isEmpty())) {      //TODO second condition
+                if (i == 0 || !(Character.isDigit(input.charAt(i-1))) || multiplier.isEmpty()) {
                     throw new IllegalArgumentException("Invalid input.");
                 } else {
                     numLeftBracket += 1;
@@ -36,26 +36,26 @@ public class ActionQueue extends MyQueue<Direction> {
                     multiplier = "";
                     direction = "";
                 }
-            } else if ((c == ']')) {                          //TODO what if your input is only ], popsecond wont work
-                if (stackString.isEmpty()) {                    //TODO also check if direction and num are NOT empty?
+            } else if (c == ']') {
+                numRightBracket += 1;
+                if (stackString.isEmpty()) {
                     break;
                 } else {
-                    numRightBracket += 1;
-                    String popFirst = this.stackString.pop();
-                    String popSecond = this.stackString.pop();
+                    String firstPop = this.stackString.pop();
+                    String secondPop = this.stackString.pop();
                     if (direction.isEmpty()) {
                         throw new IllegalArgumentException("Invalid input.");
                     } else {
                         try {
-                            int popFirstInt = Integer.parseInt(popFirst);
-                            direction = direction.repeat(popFirstInt);
-                            direction = popSecond + direction;           //Adding the number to the final string
-                        } catch (Exception e) {
+                            int firstInt = Integer.parseInt(firstPop);
+                            direction = direction.repeat(firstInt);
+                            direction = secondPop + direction;           //Adding the number to the final string
+                        } catch (Exception a) {
                             try {
-                                int popSecondInt = Integer.parseInt(popSecond);
-                                direction = direction.repeat(popSecondInt);
-                                direction = popFirst + direction;           //Adding the number to final string
-                            } catch (Exception g) {
+                                int secondInt = Integer.parseInt(secondPop);
+                                direction = direction.repeat(secondInt);
+                                direction = secondPop + direction;           //Adding the number to final string
+                            } catch (Exception b) {
                                 throw new IllegalArgumentException("Invalid input.");
                             }
                         }

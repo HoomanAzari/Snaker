@@ -9,6 +9,7 @@ public class TargetQueue extends MyQueue<Position> {
     public TargetQueue() {
         super();
         this.string_Stack = new MyStack<String>();
+        this.num = "";
     }
 
     public void clear() {
