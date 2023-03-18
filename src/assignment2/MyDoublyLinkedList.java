@@ -162,13 +162,16 @@ public class MyDoublyLinkedList<E> extends MyLinkedList<E> {
         MyDoublyLinkedList<E> other = (MyDoublyLinkedList<E>) obj;        //type casting
         Iterator<E> mainIterator = this.iterator();
         Iterator<E> otherIterator = other.iterator();
+        if (this.size != other.size) {
+            return false;
+        }
         while(mainIterator.hasNext() && otherIterator.hasNext()) {
             E mainElement = mainIterator.next();                           //The next method returns an E element
             E otherElement = otherIterator.next();
-            if (mainElement != otherElement) {                      //Check whether the two elements are the same
+            if (!(mainElement.equals(otherElement))) {                      //Check whether the two elements are the same
                 return false;
             }
-        } return true;
+        }return true;
     }
 
     private class DNode {

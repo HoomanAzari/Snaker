@@ -19,7 +19,7 @@ public class World {
 
     public void step() {
         Direction direction;
-        Position head = new Position(caterpillar.getHead());
+        Position headPos = new Position(caterpillar.getHead());
         if (actionList.isEmpty()) {
             this.gameState = GameState.NO_MORE_ACTION;
             return;
@@ -30,31 +30,32 @@ public class World {
             return;
         }
         if (direction.equals(Direction.EAST)) {
-            head.moveEast();
+            headPos.moveEast();
         } else if (direction.equals(Direction.WEST)) {
-            head.moveWest();
+            headPos.moveWest();
         } else if (direction.equals(Direction.SOUTH)) {
-            head.moveSouth();
+            headPos.moveSouth();
         } else if (direction.equals(Direction.NORTH)) {
-            head.moveNorth();
+            headPos.moveNorth();
         }
-        if (!(map.contains(head))) {
+        if (!(map.contains(headPos))) {
             this.gameState = GameState.WALL_COLLISION;
             return;
         }
-        if (this.caterpillar.selfCollision(head)) {
+        if (this.caterpillar.selfCollision(headPos)) {
             this.gameState = GameState.SELF_COLLISION;
 
-        }else if (head.equals(foodPos)) {
+        }else if (headPos.equals(foodPos)) {
             if (this.foodList.isEmpty()) {
+                this.caterpillar.eat(foodPos);
                 this.gameState = GameState.DONE;
             } else {
                 this.foodPos = foodList.dequeue();
                 this.gameState = GameState.EAT;
-                this.caterpillar.eat(head);
+                this.caterpillar.eat(headPos);
             }
         }else {
-            this.caterpillar.move(head);             //unsure about this line
+            this.caterpillar.move(headPos);             //unsure about this line
             this.gameState = GameState.MOVE;
         }
     }

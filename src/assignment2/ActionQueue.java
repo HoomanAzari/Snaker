@@ -82,7 +82,6 @@ public class ActionQueue extends MyQueue<Direction> {
                      throw new IllegalArgumentException("Invalid input.");
                  }
              }
-             this.stackString.clear();
         }
     }
 }
